@@ -16,7 +16,7 @@
 n_pages <- function(base_url){
 
   base_url                         %>%
-    xml2::read_html()                    %>%
+    xml2::read_html()              %>%
     html_nodes(".pagination-page") %>%
     html_text()                    %>%
     as.numeric()                   %>%

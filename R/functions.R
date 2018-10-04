@@ -57,6 +57,16 @@ get_reviews <- function(base_url, page_lim = NULL, company = NULL, verbose = TRU
     review <- as.character(review)
 
     # gather variables in tibble
+    if (length(id) != length(review)) {
+      id = NA
+    }
+    if (length(time) != length(review)) {
+      time = NA
+    }
+    if (length(rating) != length(review)) {
+      rating = NA
+    }
+
     tibble(id,time,rating,review)
   }
 
@@ -82,7 +92,7 @@ get_reviews <- function(base_url, page_lim = NULL, company = NULL, verbose = TRU
   else if (!is.null(company)) {
     data <- urls %>% map(build_dfs)
     data <- do.call("rbind",data) %>%
-      mutate(company = company) %>%
+      mutate(company = company)   %>%
       select(company, everything())
   }
 }
