@@ -3,8 +3,8 @@ Type: Package
 Title: Scrapes Reviews And Ratings From Trustpilot
 Version: 0.1.0
 Author: Peer Christensen
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: This package scrapes user reviews of companies from Trustpilot.
+Maintainer: The package maintainer <hr.pchristensen@gmail.com>
+Description: This package scrapes user reviews of businesses from Trustpilot.
     It also gathers the ID of the reviewer, date of review and the star rating (1-5).
     You can set page_lim to control how many pages to parse.
 License: -
