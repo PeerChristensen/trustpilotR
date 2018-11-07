@@ -36,7 +36,7 @@ get_pages <- function(base_url){
 
 get_time <- function(html) {
 
-  time = html             %>%
+  html                    %>%
     html_nodes(".header__verified__date time")    %>%
     html_attrs()          %>%
     map(1)                %>%
