@@ -37,22 +37,11 @@ get_pages <- function(base_url){
 get_time <- function(html) {
 
   time = html             %>%
-    html_nodes("time")    %>%
+    html_nodes(".header__verified__date time")    %>%
     html_attrs()          %>%
     map(1)                %>%
     unlist()              %>%
     date()
-
-  class = html            %>%
-    html_nodes("time")    %>%
-    html_attrs()          %>%
-    map(2)
-
-  data.frame(time,class)     %>%
-    filter(class == "ndate") %>%
-    select(time)             %>%
-    pull(time)               %>%
-    tail(20)
 }
 
 ### FUNCTION: GET ID ###
