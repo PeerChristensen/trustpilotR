@@ -36,12 +36,22 @@ get_pages <- function(base_url){
 
 get_time <- function(html) {
 
-  html                    %>%
+  time <- html            %>%
     html_nodes(".header__verified__date time")    %>%
     html_attrs()          %>%
     map(1)                %>%
     unlist()              %>%
     date()
+
+  class = html            %>%
+    html_nodes(".header__verified__date time")    %>%
+    html_attrs()          %>%
+    map(2)
+
+  data.frame(time,class)     %>%
+    filter(class == "ndate") %>%
+    select(time)             %>%
+    pull(time)
 }
 
 ### FUNCTION: GET ID ###
@@ -58,11 +68,10 @@ get_id <- function(html) {
 get_rating <- function(html) {
 
   html                         %>%
-    html_nodes(".star-rating") %>%
+    html_nodes(".content-section__review-info .star-rating") %>%
     html_attrs()               %>%
     str_extract("[:digit:]")   %>%
-    as.numeric()               %>%
-    tail(20)
+    as.numeric()
 }
 
 ### FUNCTION: GET REVIEW TEXT ###
