@@ -75,8 +75,8 @@ get_reviews <- function(base_url, page_lim = NULL, company = NULL, verbose = TRU
 
   # if page limit is set, do..
   if (!is.null(page_lim)) {
-    urls <- get_pages(base_url)
-    urls <- urls[1:page_lim]
+    #urls <- get_pages(base_url)
+    urls <- paste0(base_url,"?page=", seq(1,page_lim))
   }
 
   else if (is.null(page_lim)) {
