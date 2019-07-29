@@ -9,6 +9,7 @@
 #' @import dplyr
 #' @import lubridate
 #' @import stringr
+#' @import jsonlite
 
 
 ### FUNCTION: GET N PAGES ###
@@ -32,53 +33,43 @@ get_pages <- function(base_url){
   urls         = paste0(base_url,"?page=", page_numbers)
 }
 
-### FUNCTION: GET TIME ###
+### FUNCTION: GET DATE ###
 
-get_time <- function(html) {
+get_date <- function(html) {
 
-  time <- html            %>%
-    html_nodes(".header__verified__date time")    %>%
-    html_attrs()          %>%
-    map(1)                %>%
-    unlist()              %>%
-    date()
-
-  class = html            %>%
-    html_nodes(".header__verified__date time")    %>%
-    html_attrs()          %>%
-    map(2)
-
-  data.frame(time,class)     %>%
-    filter(class == "ndate") %>%
-    select(time)             %>%
-    pull(time)
+  html %>%
+    html_nodes(".review-card [data-initial-state='review-dates']") %>%
+    html_text() %>%
+    map(fromJSON) %>%
+    map_chr(1) %>%
+    lubridate::date()
 }
+### FUNCTION: GET INFO ###
 
-### FUNCTION: GET ID ###
+get_info <- function(html) {
 
-get_id <- function(html) {
-
-  html                                    %>%
-    html_nodes("consumer-review-picture") %>%
-    html_attr("consumer-display-name")
+  html %>%
+    html_nodes("[data-initial-state='review-info']") %>%
+    html_text() %>%
+    map_df(fromJSON)
 }
 
 ### FUNCTION: GET RATING ###
 
-get_rating <- function(html) {
-
-  html                         %>%
-    html_nodes(".content-section__review-info .star-rating") %>%
-    html_attrs()               %>%
-    str_extract("[:digit:]")   %>%
-    as.numeric()
-}
+# get_rating <- function(html) {
+#
+#   html                         %>%
+#     html_nodes(".content-section__review-info .star-rating") %>%
+#     html_attrs()               %>%
+#     str_extract("[:digit:]")   %>%
+#     as.numeric()
+# }
 
 ### FUNCTION: GET REVIEW TEXT ###
 
 get_review_text <- function(html) {
 
-  html                                     %>%
-    html_nodes(".review-info__body__text") %>%
+  html %>%
+    html_nodes(".review-content__text") %>%
     html_text(trim=T)
 }

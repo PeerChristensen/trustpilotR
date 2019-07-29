@@ -1,15 +1,5 @@
 #' Main function at user level
-#
-# You can learn more about package authoring with RStudio at:
-#
-#   http://r-pkgs.had.co.nz/
-#
-# Some useful keyboard shortcuts for package authoring:
-#
-#   Build and Reload Package:  'Cmd + Shift + B'
-#   Check Package:             'Cmd + Shift + E'
-#   Test Package:              'Cmd + Shift + T'
-
+#'
 #' @param base_url url provided by user
 #' @param page_lim number of pages to parse
 #' @param company  company name
@@ -41,34 +31,34 @@ get_reviews <- function(base_url, page_lim = NULL, company = NULL, verbose = TRU
     if (verbose == TRUE) {
       message(url)
     }
+
     # get HTML
     html <- url %>% xml2::read_html()
 
-    # get id
-    id <- html %>% get_id()
+    # get info
+    info <- html %>% get_info()
 
-    # get time
-    time <- html %>% get_time()
-
-    # get rating
-    rating <- html %>% get_rating()
+    # get date
+    date <- html %>% get_date()
 
     # get review
     review <- html %>% get_review_text()
     review <- as.character(review)
 
-    # gather variables in tibble
-    if (length(id) != length(review)) {
-      id = NA
-    }
-    if (length(time) != length(review)) {
-      time = NA
-    }
-    if (length(rating) != length(review)) {
-      rating = NA
-    }
+    # # gather variables in tibble
+    # if (length(id) != length(review)) {
+    #   id = NA
+    # }
+    # if (length(time) != length(review)) {
+    #   time = NA
+    # }
+    # if (length(rating) != length(review)) {
+    #   rating = NA
+    # }
 
-    tibble(id,time,rating,review)
+    info %>%
+      tibble::add_column(date = date,review=review) %>%
+      select(date,consumerName,stars,review,everything())
   }
 
   ### START OF MAIN FUNCTION ###
@@ -81,6 +71,7 @@ get_reviews <- function(base_url, page_lim = NULL, company = NULL, verbose = TRU
 
   else if (is.null(page_lim)) {
     urls <- get_pages(base_url)
+
   }
 
   # if company name is set, do..

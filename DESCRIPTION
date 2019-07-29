@@ -10,13 +10,15 @@ Description: This package scrapes user reviews of businesses from Trustpilot.
 License: -
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.0.9000
+RoxygenNote: 6.1.1
 Imports:
     rvest, 
     tidyverse,
     lubridate,
     stringr,
     dplyr,
-    magrittr
+    magrittr,
+    purrr,
+    jsonlite
 URL: https://github.com/PeerChristensen/trustpilotR
 BugReports: https://github.com/PeerChristensen/trustpilotR/issues
