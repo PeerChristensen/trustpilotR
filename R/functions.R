@@ -14,7 +14,7 @@
 #' @import purrr
 #' @import xml2
 #' @examples
-#' get_reviews("https://dk.trustpilot.com/review/trustpilot.com",5,"trustpilot")
+#' get_reviews("https://dk.trustpilot.com/review/trustpilot.com",2,"trustpilot")
 
 
 ### MAIN FUNCTION: PREPARE REVIEW DATASET ###
