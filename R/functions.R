@@ -12,7 +12,7 @@
 #' @import lubridate
 #' @import stringr
 #' @import purrr
-#'
+#' @import xml2
 #' @examples
 #' get_reviews("https://dk.trustpilot.com/review/trustpilot.com",5,"trustpilot")
 
