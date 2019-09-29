@@ -12,7 +12,7 @@
 #' @import lubridate
 #' @import stringr
 #' @import purrr
-#' @import xml2
+#'
 #' @examples
 #' get_reviews("https://dk.trustpilot.com/review/trustpilot.com",2,"trustpilot")
 
@@ -88,10 +88,5 @@ get_reviews <- function(base_url, page_lim = NULL, company = NULL, verbose = TRU
       select(company, everything())
   }
 }
-
-# example
-#base_url = "https://dk.trustpilot.com/review/www.3.dk"
-#d = get_reviews(base_url,6,verbose=T)
-#d
 
 

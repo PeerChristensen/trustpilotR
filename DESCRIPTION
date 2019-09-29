@@ -19,7 +19,6 @@ Imports:
     dplyr,
     magrittr,
     purrr,
-    jsonlite,
-    xml2
+    jsonlite
 URL: https://github.com/PeerChristensen/trustpilotR
 BugReports: https://github.com/PeerChristensen/trustpilotR/issues

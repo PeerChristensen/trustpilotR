@@ -20,5 +20,5 @@ get_reviews(base_url, page_lim = NULL, company = NULL,
 Main function at user level
 }
 \examples{
-get_reviews("https://dk.trustpilot.com/review/trustpilot.com",5,"trustpilot")
+get_reviews("https://dk.trustpilot.com/review/trustpilot.com",2,"trustpilot")
 }
